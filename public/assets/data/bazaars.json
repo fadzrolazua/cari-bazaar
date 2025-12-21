@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Bazaar Jalan TAR",
+    "lat": 3.1596,
+    "lng": 101.6994,
+    "city": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "openToday": true,
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "Petaling Street Bazaar",
+    "lat": 3.1456,
+    "lng": 101.6967,
+    "city": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "openToday": false,
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "name": "Bazaar Ramadan TTDI",
+    "lat": 3.1368,
+    "lng": 101.6283,
+    "city": "Kuala Lumpur",
+    "state": "Wilayah Persekutuan Kuala Lumpur",
+    "openToday": true,
+    "isActive": true
+  },
+  {
+    "id": 4,
+    "name": "Bazaar Ramadan Shah Alam Stadium",
+    "lat": 3.0826,
+    "lng": 101.5437,
+    "city": "Shah Alam",
+    "state": "Selangor",
+    "openToday": true,
+    "isActive": true
+  },
+  {
+    "id": 5,
+    "name": "Bazaar Ramadan Seksyen 13",
+    "lat": 3.0721,
+    "lng": 101.5186,
+    "city": "Shah Alam",
+    "state": "Selangor",
+    "openToday": false,
+    "isActive": true
+  },
+  {
+    "id": 6,
+    "name": "Bazaar Bandar Baru Bangi",
+    "lat": 2.9627,
+    "lng": 101.7604,
+    "city": "Bangi",
+    "state": "Selangor",
+    "openToday": true,
+    "isActive": true
+  },
+  {
+    "id": 7,
+    "name": "Bazaar Ramadan Gombak",
+    "lat": 3.2332,
+    "lng": 101.6860,
+    "city": "Gombak",
+    "state": "Selangor",
+    "openToday": true,
+    "isActive": true
+  },
+  {
+    "id": 8,
+    "name": "Bazaar SS15",
+    "lat": 3.0738,
+    "lng": 101.5851,
+    "city": "Subang Jaya",
+    "state": "Selangor",
+    "openToday": false,
+    "isActive": true
+  }
+]

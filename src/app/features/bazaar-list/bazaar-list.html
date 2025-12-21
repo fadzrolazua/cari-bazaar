@@ -1,0 +1,21 @@
+<div class="sidebar-content">
+  <h2 class="logo">Cari Bazaar</h2>
+  <p class="subtitle">Discover bazaars near you</p>
+
+  <h4 class="section-title">Nearby Bazaars</h4>
+
+  <div class="bazaar-card" *ngFor="let bazaar of bazaars">
+    <h5>{{ bazaar.name }}</h5>
+    <p>{{ bazaar.city }}</p>
+
+    <div class="meta">
+      <span></span>
+      <span
+        class="status"
+        [class.open]="bazaar.openToday"
+      >
+        {{ bazaar.openToday ? 'Open Now' : 'Closed' }}
+      </span>
+    </div>
+  </div>
+</div>
