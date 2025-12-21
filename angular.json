@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/cari-bazaar",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -94,5 +95,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "168e4aab-4f37-4042-b2cf-cf75b3546041"
   }
 }
