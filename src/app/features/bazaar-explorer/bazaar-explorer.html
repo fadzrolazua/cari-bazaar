@@ -1,0 +1,62 @@
+<main class="explorer" aria-label="CariBazaar explorer">
+  <aside class="explorer__sidebar">
+    <app-bazaar-list
+      [bazaars]="facade.visibleBazaars()"
+      [totalCount]="facade.totalCount()"
+      [openCount]="facade.openCount()"
+      [selectedBazaarId]="facade.selectedBazaarId()"
+      [userLocation]="facade.userLocation()"
+      [searchQuery]="facade.searchQuery()"
+      [showOpenOnly]="facade.openOnly()"
+      [isLoading]="facade.isLoading()"
+      [errorMessage]="facade.errorMessage()"
+      (searchChanged)="facade.setSearchQuery($event)"
+      (openOnlyChanged)="facade.setOpenOnly($event)"
+      (bazaarSelected)="facade.selectBazaar($event)"
+      (retryRequested)="facade.load()"
+    />
+  </aside>
+
+  <section class="explorer__map" aria-label="Bazaar map">
+    <app-bazaar-map
+      [bazaars]="facade.visibleBazaars()"
+      [selectedBazaarId]="facade.selectedBazaarId()"
+      [userLocation]="facade.userLocation()"
+      [locationRadius]="facade.locationRadiusMeters()"
+      (bazaarSelected)="facade.selectBazaar($event)"
+    />
+  </section>
+
+  <button
+    class="settings-button"
+    type="button"
+    aria-label="Open settings"
+    title="Settings"
+    aria-haspopup="dialog"
+    [attr.aria-expanded]="isSettingsOpen()"
+    aria-controls="explorer-settings"
+    (click)="toggleSettings()"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.09a2 2 0 0 1 1 1.74v.5a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  </button>
+
+  @if (isSettingsOpen()) {
+    <app-settings-panel
+      id="explorer-settings"
+      [locationEnabled]="facade.hasUserLocation()"
+      [locationLoading]="facade.isLocationLoading()"
+      [locationErrorMessage]="facade.locationErrorMessage()"
+      [locationRadius]="facade.locationRadiusMeters()"
+      [dataCount]="facade.totalCount()"
+      [dataLoading]="facade.isLoading()"
+      (closed)="closeSettings()"
+      (locationRequested)="facade.requestUserLocation()"
+      (locationCleared)="facade.clearUserLocation()"
+      (radiusChanged)="facade.setLocationRadius($event)"
+      (dataRefreshRequested)="facade.load()"
+    />
+  }
+</main>

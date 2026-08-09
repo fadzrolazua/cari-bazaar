@@ -34,8 +34,8 @@
               "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": [
-              "node_modules/leaflet/dist/leaflet.js"
+            "allowedCommonJsDependencies": [
+              "leaflet"
             ]
           },
           "configurations": {
@@ -95,9 +95,6 @@
             "styles": [
               "src/styles.scss",
               "node_modules/leaflet/dist/leaflet.css"
-            ],
-            "scripts": [
-              "node_modules/leaflet/dist/leaflet.js"
             ]
           }
         },
@@ -106,8 +103,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "168e4aab-4f37-4042-b2cf-cf75b3546041"
   }
 }

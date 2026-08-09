@@ -1,59 +1,66 @@
 # CariBazaar
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+CariBazaar is a small Angular portfolio project for discovering local bazaars on an interactive Leaflet map. The app demonstrates a clean separation between domain rules, application state, infrastructure, and reusable UI components.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Browse active bazaars on a responsive split-screen layout
+- Keep the explorer within one viewport; only the directory list scrolls
+- Search by bazaar name, city, or state
+- Filter bazaars that are open today
+- Select a bazaar from the list or map and focus the map automatically
+- Optional browser geolocation with a configurable map radius
+- Sort results by distance when location access is enabled
+- Settings panel for location preferences and refreshing demo data
+- Loading, empty, and error states
+- Accessible controls, keyboard focus styles, and responsive mobile layout
 
-```bash
-ng serve
+## Architecture
+
+The project follows a lightweight Clean Architecture approach:
+
+```text
+src/app/
+├── core/
+│   ├── domain/             # Business models and value objects
+│   ├── application/       # Use cases and repository ports
+│   └── infrastructure/    # HTTP/file-backed repository adapters
+├── features/
+│   ├── bazaar-explorer/   # Screen facade and container component
+│   ├── bazaar-list/       # Presentational list and reusable bazaar card
+│   ├── map/               # Reusable Leaflet map adapter
+│   └── settings/          # Location and data preferences
+└── shared/ui/             # Reusable loading, empty, and status components
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The dependency direction is intentional:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+UI components → feature facade → use cases → repository port ← infrastructure adapter
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The UI does not fetch data directly. `GetActiveBazaarsUseCase` owns the active-bazaar rule, while `HttpBazaarRepository` validates and maps the JSON record shape into the domain model. Replacing the local JSON file with an API only requires a new repository adapter. Geospatial calculations live in a pure domain utility and the Leaflet adapter handles map lifecycle and resizing.
+
+## Getting started
 
 ```bash
-ng generate --help
+npm install
+npm start
 ```
 
-## Building
+Open <http://localhost:4200/> in a browser. The development server reloads automatically when source files change. Browser geolocation requires HTTPS (or localhost).
 
-To build the project run:
+## Scripts
 
-```bash
-ng build
-```
+| Command | Description |
+| --- | --- |
+| `npm start` | Run the development server |
+| `npm run build` | Create a production build |
+| `npm test` | Run unit tests with Karma |
+| `npm run test:ci` | Run headless unit tests once |
+| `npm run watch` | Build continuously in development mode |
+| `npm audit` | Check dependency security advisories |
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Data and map attribution
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Demo data lives in `public/assets/data/bazaars.json`. Map tiles are provided by [OpenStreetMap](https://www.openstreetmap.org/) and displayed through [Leaflet](https://leafletjs.com/). The map includes the required OpenStreetMap attribution.

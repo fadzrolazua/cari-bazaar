@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, signal } from '@angular/core';
-import { MapComponent } from './features/map/map';
-import { BazaarListComponent } from './features/bazaar-list/bazaar-list';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  imports: [MapComponent, BazaarListComponent]
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  protected readonly title = signal('cari-bazaar');
-}
+export class App {}

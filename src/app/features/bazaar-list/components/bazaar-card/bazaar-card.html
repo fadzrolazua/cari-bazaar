@@ -1,0 +1,32 @@
+<button
+  class="bazaar-card"
+  [class.bazaar-card--selected]="selected()"
+  type="button"
+  [attr.aria-pressed]="selected()"
+  (click)="select()"
+>
+  <div class="bazaar-card__topline">
+    <span class="bazaar-card__eyebrow">{{ bazaar().city }}</span>
+    <app-bazaar-status-badge [isOpen]="bazaar().openToday" />
+  </div>
+
+  <h3>{{ bazaar().name }}</h3>
+
+  <p class="bazaar-card__location">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z" />
+      <circle cx="12" cy="9" r="2.25" />
+    </svg>
+    <span>{{ bazaar().state }}</span>
+    @if (distanceLabel(); as distance) {
+      <span class="bazaar-card__distance">· {{ distance }}</span>
+    }
+  </p>
+
+  <span class="bazaar-card__action">
+    {{ selected() ? 'Selected on map' : 'View on map' }}
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 12h13m-6-6 6 6-6 6" />
+    </svg>
+  </span>
+</button>

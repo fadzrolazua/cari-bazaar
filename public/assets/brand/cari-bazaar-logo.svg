@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">CariBazaar logo</title>
+  <desc id="desc">A location pin containing a market stall</desc>
+  <defs>
+    <linearGradient id="logo-bg" x1="8" y1="6" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f47b5d" />
+      <stop offset="1" stop-color="#d9533e" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="17" fill="url(#logo-bg)" />
+  <path
+    d="M32 55S48 42.4 48 29a16 16 0 1 0-32 0c0 13.4 16 26 16 26Z"
+    fill="none"
+    stroke="#fff"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3.5"
+  />
+  <path d="M21 29h22l-2.5 5.5h-17Z" fill="#fff" />
+  <path
+    d="M23.5 35v9h17v-9M29 44v-5h5v5"
+    fill="none"
+    stroke="#fff"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3"
+  />
+</svg>

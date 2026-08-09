@@ -1,21 +1,94 @@
 <div class="sidebar-content">
-  <h2 class="logo">Cari Bazaar</h2>
-  <p class="subtitle">Discover bazaars near you</p>
-
-  <h4 class="section-title">Nearby Bazaars</h4>
-
-  <div class="bazaar-card" *ngFor="let bazaar of bazaars">
-    <h5>{{ bazaar.name }}</h5>
-    <p>{{ bazaar.city }}</p>
-
-    <div class="meta">
-      <span></span>
-      <span
-        class="status"
-        [class.open]="bazaar.openToday"
-      >
-        {{ bazaar.openToday ? 'Open Now' : 'Closed' }}
-      </span>
+  <header class="brand">
+    <img
+      class="brand__mark"
+      src="assets/brand/cari-bazaar-logo.svg"
+      alt=""
+      aria-hidden="true"
+    />
+    <div class="brand__copy">
+      <p class="brand__name">CariBazaar</p>
+      <p class="brand__tagline">Local bazaar directory</p>
     </div>
+  </header>
+
+  <div class="search-panel">
+    <label class="search-field">
+      <span class="sr-only">Search bazaars</span>
+      <svg class="search-field__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5" />
+        <path d="m16 16 4.5 4.5" />
+      </svg>
+      <input
+        type="search"
+        autocomplete="off"
+        placeholder="Search bazaars"
+        [value]="searchQuery()"
+        (input)="onSearchInput($event)"
+      />
+      @if (searchQuery()) {
+        <button class="search-field__clear" type="button" aria-label="Clear search" (click)="clearSearch()">
+          ×
+        </button>
+      }
+    </label>
+
+    <label class="filter-toggle">
+      <input type="checkbox" [checked]="showOpenOnly()" (change)="onOpenOnlyChange($event)" />
+      <span class="filter-toggle__track" aria-hidden="true"><span></span></span>
+      <span>Open today</span>
+    </label>
   </div>
+
+  <div class="results-heading">
+    <div>
+      <p class="results-heading__eyebrow">Directory</p>
+      <h1>Nearby bazaars</h1>
+    </div>
+    <span class="results-heading__count" aria-live="polite">{{ bazaars().length }}</span>
+  </div>
+
+  @if (totalCount() > 0) {
+    <div class="results-summary">
+      <span>Showing {{ bazaars().length }} of {{ totalCount() }}</span>
+      <span>{{ userLocation() ? 'Closest first' : openCount() + ' open today' }}</span>
+    </div>
+  }
+
+  <div class="results-list">
+    @if (isLoading()) {
+      <app-loading-state />
+    } @else if (errorMessage(); as error) {
+      <div class="error-state" role="alert">
+        <strong>Something went wrong</strong>
+        <p>{{ error }}</p>
+        <button type="button" (click)="retryRequested.emit()">Try again</button>
+      </div>
+    } @else if (bazaars().length === 0) {
+      <app-empty-state
+        [title]="totalCount() === 0 ? 'No bazaars available' : 'No matches found'"
+        [message]="
+          totalCount() === 0
+            ? 'There are no active bazaars to show right now.'
+            : 'Try another search or remove the open-only filter.'
+        "
+        [actionLabel]="totalCount() === 0 ? null : 'Clear filters'"
+        (action)="clearFilters()"
+      />
+    } @else {
+      @for (bazaar of bazaars(); track bazaar.id) {
+        <app-bazaar-card
+          [bazaar]="bazaar"
+          [userLocation]="userLocation()"
+          [selected]="selectedBazaarId() === bazaar.id"
+          (selectedChange)="bazaarSelected.emit($event)"
+        />
+      }
+    }
+  </div>
+
+  <footer class="sidebar-footer">
+    <span class="sidebar-footer__dot" aria-hidden="true"></span>
+    <span>Data updates from the local dataset</span>
+  </footer>
 </div>
